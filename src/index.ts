@@ -2,6 +2,7 @@ import express, {
     Application, Request, Response, NextFunction,
  } from "express";
 import dotenv from "dotenv";
+import cors from 'cors';
 
 const applyRoutes = require("./routes");
 
@@ -12,12 +13,17 @@ dotenv.config();
 const app: Application = express();
 const PORT: number = parseInt(process.env.PORT ?? '8080');
 
+// rules of our app
+app.use(
+  cors({
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+  })
+)
 
 // setting the routes
-app.get('/', async (req: Request, res: Response) => {
-    res.send('Welcome to Buda Spread API');
-  });
-
+const welcome = 'Welcome to Buda Spread API';
+app.get('/', async (req: Request, res: Response) => res.send(welcome));
 applyRoutes(app, 'api');
 
 // error handling for the routes
