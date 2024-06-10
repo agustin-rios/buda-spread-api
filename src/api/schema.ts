@@ -14,6 +14,10 @@ export interface paths {
     /** Info for a specific market */
     get: operations["showMarketById"];
   };
+  "markets/{marketId}/order_book": {
+    /** Info for a specific market order book */
+    get: operations["showOrderBook"];
+  };
 }
 
 export type webhooks = Record<string, never>;
@@ -37,10 +41,10 @@ export interface components {
     };
     Market: { market: components["schemas"]["MarketBase"] };
     Markets: { markets: components["schemas"]["MarketBase"][] };
-    OrderBook: {
+    OrderBook: { order_book: {
       asks: [string, string][];
       bids: [string, string][];
-    };
+    }};
     Error: {
       code: number;
       message: string;
@@ -85,7 +89,7 @@ export interface operations {
   showMarketById: {
     parameters: {
       path: {
-        /** @description The id of the pet to retrieve */
+        /** @description The id of the market to retrieve */
         marketId: string;
       };
     };
@@ -100,6 +104,29 @@ export interface operations {
       default: {
         content: {
           "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  /** Info for a specific market order book */
+  showOrderBook: {
+    parameters: {
+      path: {
+        /** @description The id of the market to retrieve */
+        marketId: string;
+      };
+    };
+    responses: {
+      /** @description Expected response to a valid request */
+      200: {
+        content: {
+          "application/json": components["schemas"]["OrderBook"];
+        };
+      };
+      /** @description unexpected error */
+      default: {
+        content: {
+          "application/json": components["schemas"]["OrderBook"];
         };
       };
     };

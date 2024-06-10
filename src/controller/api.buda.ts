@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { getMarkets, getMarketById } from "../api/buda";
+import { getMarkets, getMarketById, getMarketOrderBook } from "../api/buda";
 
 const getMarketsFromBuda = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -23,7 +23,19 @@ const getMarketByIdFromBuda = async (req: Request, res: Response, next: NextFunc
   }
 }
 
+const getMarketOrderBookFromBuda = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { marketId } = req.params;
+    const { data } = await getMarketOrderBook({ params: { path: { marketId }} });
+    const { order_book } = data;
+    res.status(200).json( order_book );
+  } catch ( error ) {
+    next( error );
+  }
+}
+
 module.exports = {
   getMarketsFromBuda,
   getMarketByIdFromBuda,
+  getMarketOrderBookFromBuda,
 };
