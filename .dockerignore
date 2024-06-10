@@ -1,0 +1,21 @@
+# Ignore directories
+node_modules/
+dist/
+.test/
+.husky/
+.github/
+
+# Environment files
+.env.example
+
+# Various configuration files
+.dockerignore
+.gitignore
+.eslintignore
+.eslintrc.json
+.git/
+*.md
+
+# Ignore specific files
+npm-debug.log
+yarn-error.log

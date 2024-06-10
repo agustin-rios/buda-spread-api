@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  api:
+    stdin_open: true
+    environment:
+      - PORT=${PORT}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    ports:
+      - "${PORT}:3000"
+    restart: unless-stopped
