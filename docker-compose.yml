@@ -1,13 +1,15 @@
-version: '3.9'
+version: '3.8'
+
 services:
-  api:
-    stdin_open: true
-    environment:
-      - PORT=${PORT}
+  app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: api
     ports:
-      - "${PORT}:3000"
-    restart: unless-stopped
+      - "${PORT:-8080}:${PORT:-8080}"
+    environment:
+      - PORT=${PORT:-8080}
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run dev

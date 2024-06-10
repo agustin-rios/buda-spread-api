@@ -17,10 +17,12 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Specify a default port in case PORT is not provided
+# Set the environment variable PORT
 ARG PORT=8080
 ENV PORT=$PORT
+
+# Expose the specified port
 EXPOSE $PORT
 
 # Execute app
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]
