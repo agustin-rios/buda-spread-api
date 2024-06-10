@@ -9,7 +9,6 @@
 - [Environment Variables](#environment-variables)
 - [Docker](#docker)
 - [Docker Compose](#docker-compose)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Description
@@ -64,9 +63,6 @@ The project uses environment variables for configuration. An example file `.env.
 ```env
 # .env.example
 PORT=3000
-DB_HOST=localhost
-DB_USER=root
-DB_PASS=s1mpl3
 ```
 
 ## Docker
