@@ -29,7 +29,7 @@ applyRoutes(app, 'api');
 // error handling for the routes
 app.use((req: Request, res: Response) => {
     const error: any = new Error('Route Not Found');
-    return res.status(404).json({
+    res.status(404).json({
       message: error.message,
     });
   });
