@@ -14,7 +14,6 @@ type GetMarketByIdResponse = paths['/markets/{marketId}']['get']['responses']['2
 
 // API client
 const budaApiUrl = process.env.BUDA_API_URL;
-console.log(budaApiUrl)
 if (!budaApiUrl) throw new Error('Environment variable BUDA_API_URL is required.');
 const budaAPIClient = axios.create({
     baseURL: budaApiUrl
@@ -24,9 +23,10 @@ const budaAPIClient = axios.create({
 
 export const getMarkets = ({ params } : { params: GetMarketsRequest }) => budaAPIClient.request<GetMarketsResponse>({
     method: 'GET' as Method,
+    url: '/markets'
 })
 
 export const getMarketById = ({ params } : { params: GetMarketByIdRequest }) => budaAPIClient.request<GetMarketByIdResponse>({
     method: 'GET' as Method,
-    url: `${params.path.marketId}/`,
+    url: `/markets/${params.path.marketId}`,
 })

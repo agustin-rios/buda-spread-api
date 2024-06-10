@@ -20,7 +20,7 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
-    Market: {
+    MarketBase: {
       id: string;
       name: string;
       base_currency: string;
@@ -35,7 +35,8 @@ export interface components {
       maker_discount_percentage: string;
       taker_discount_percentage: string;
     };
-    Markets: components["schemas"]["Market"][];
+    Market: { market: components["schemas"]["MarketBase"] };
+    Markets: { markets: components["schemas"]["MarketBase"][] };
     OrderBook: {
       asks: [string, string][];
       bids: [string, string][];
@@ -92,7 +93,7 @@ export interface operations {
       /** @description Expected response to a valid request */
       200: {
         content: {
-          "application/json": components["schemas"]["Markets"];
+          "application/json": components["schemas"]["Market"];
         };
       };
       /** @description unexpected error */
