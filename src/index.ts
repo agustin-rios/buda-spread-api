@@ -34,14 +34,14 @@ app.use((req: Request, res: Response) => {
     });
   });
   
-  app.use((error: Error, req: Request, res: Response) => {
-    console.log(`[server-error]: ${error}`);
-    res.status(500).json({
-      error: {
-        message: error.message,
-      },
-    });
+app.use((error: Error, req: Request, res: Response) => {
+  console.log(`[server-error]: ${error}`);
+  res.status(500).json({
+    error: {
+      message: error.message,
+    },
   });
-  
+});
+
 // listening to server connection
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
