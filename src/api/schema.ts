@@ -60,7 +60,7 @@ export interface operations {
 
   /** List all markets */
   listMarkets: {
-    parameters: {};
+    parameters?: {};
     responses: {
       /** @description An array of markets */
       200: {

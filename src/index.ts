@@ -24,7 +24,7 @@ app.use(
 // setting the routes
 const welcome = 'Welcome to Buda Spread API';
 app.get('/', async (req: Request, res: Response) => res.send(welcome));
-applyRoutes(app, 'api');
+applyRoutes(app, '/api');
 
 // error handling for the routes
 app.use((req: Request, res: Response) => {

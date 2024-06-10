@@ -1,5 +1,8 @@
 import axios, { type Method } from 'axios';
-import { paths } from '../schema';
+import dotenv from 'dotenv';
+dotenv.config(); // Load environment variables from .env file
+
+import { paths } from './schema';
 
 // Request shape
 type GetMarketsRequest = paths['/markets']['get']['parameters']
@@ -11,6 +14,7 @@ type GetMarketByIdResponse = paths['/markets/{marketId}']['get']['responses']['2
 
 // API client
 const budaApiUrl = process.env.BUDA_API_URL;
+console.log(budaApiUrl)
 if (!budaApiUrl) throw new Error('Environment variable BUDA_API_URL is required.');
 const budaAPIClient = axios.create({
     baseURL: budaApiUrl
