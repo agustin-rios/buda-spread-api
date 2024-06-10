@@ -6,15 +6,13 @@
 
 
 export interface paths {
-  "/pets": {
-    /** List all pets */
-    get: operations["listPets"];
-    /** Create a pet */
-    post: operations["createPets"];
+  "/markets": {
+    /** List all markets */
+    get: operations["listMarkets"];
   };
-  "/pets/{petId}": {
-    /** Info for a specific pet */
-    get: operations["showPetById"];
+  "/markets/{marketId}": {
+    /** Info for a specific market */
+    get: operations["showMarketById"];
   };
 }
 
@@ -22,15 +20,27 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
-    Pet: {
-      /** Format: int64 */
-      id: number;
+    Market: {
+      id: string;
       name: string;
-      tag?: string;
+      base_currency: string;
+      quote_currency: string;
+      minimum_order_amount: {
+        amount: number;
+        currency: string;
+      };
+      taker_fee: number;
+      maker_fee: number;
+      max_orders_per_minute: number;
+      maker_discount_percentage: string;
+      taker_discount_percentage: string;
     };
-    Pets: components["schemas"]["Pet"][];
+    Markets: components["schemas"]["Market"][];
+    OrderBook: {
+      asks: [string, string][];
+      bids: [string, string][];
+    };
     Error: {
-      /** Format: int32 */
       code: number;
       message: string;
     };
@@ -48,23 +58,18 @@ export type external = Record<string, never>;
 
 export interface operations {
 
-  /** List all pets */
-  listPets: {
-    parameters: {
-      query?: {
-        /** @description How many items to return at one time (max 100) */
-        limit?: number;
-      };
-    };
+  /** List all markets */
+  listMarkets: {
+    parameters: {};
     responses: {
-      /** @description A paged array of pets */
+      /** @description An array of markets */
       200: {
         headers: {
           /** @description A link to the next page of responses */
           "x-next"?: string;
         };
         content: {
-          "application/json": components["schemas"]["Pets"];
+          "application/json": components["schemas"]["Markets"];
         };
       };
       /** @description unexpected error */
@@ -75,39 +80,19 @@ export interface operations {
       };
     };
   };
-  /** Create a pet */
-  createPets: {
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Pet"];
-      };
-    };
-    responses: {
-      /** @description Null response */
-      201: {
-        content: never;
-      };
-      /** @description unexpected error */
-      default: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-    };
-  };
-  /** Info for a specific pet */
-  showPetById: {
+  /** Info for a specific market */
+  showMarketById: {
     parameters: {
       path: {
         /** @description The id of the pet to retrieve */
-        petId: string;
+        marketId: string;
       };
     };
     responses: {
       /** @description Expected response to a valid request */
       200: {
         content: {
-          "application/json": components["schemas"]["Pet"];
+          "application/json": components["schemas"]["Markets"];
         };
       };
       /** @description unexpected error */
