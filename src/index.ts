@@ -1,19 +1,41 @@
-import express, { Application } from "express";
+import express, { 
+    Application, Request, Response, NextFunction,
+ } from "express";
 import dotenv from "dotenv";
+
+const applyRoutes = require("./routes");
 
 
 dotenv.config();
 
-
+// setting app
 const app: Application = express();
 const PORT: number = parseInt(process.env.PORT ?? '8080');
 
-app.get('/', async (_req, res) => {
-    res.send({
-        message: `Server is running on port ${PORT}`,
-    });
-});
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// setting the routes
+app.get('/', async (req: Request, res: Response) => {
+    res.send('Welcome to Buda Spread API');
+  });
+
+applyRoutes(app, 'api');
+
+// error handling for the routes
+app.use((req: Request, res: Response) => {
+    const error: any = new Error('Route Not Found');
+    return res.status(404).json({
+      message: error.message,
+    });
+  });
+  
+  app.use((error: Error, req: Request, res: Response) => {
+    console.log(`[server-error]: ${error}`);
+    res.status(500).json({
+      error: {
+        message: error.message,
+      },
+    });
+  });
+  
+// listening to server connection
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
