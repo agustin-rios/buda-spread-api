@@ -106,7 +106,7 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "__test__/poll.test.ts"],
   "exclude": [
     "node_modules",
     "__test__"                                           /* Exclude all test to build in prod */

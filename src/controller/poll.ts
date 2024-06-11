@@ -8,7 +8,7 @@ type Alert = {
     spread: number;
 }
 
-const getUpdateAlertByMarketId = async (req: Request, res: Response, next: NextFunction) => {
+export const getUpdateAlertByMarketId = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { marketId } = req.params;
 
@@ -35,7 +35,7 @@ const getUpdateAlertByMarketId = async (req: Request, res: Response, next: NextF
     }
 }
 
-const getUpdateAlertOnAllMarket = async (req: Request, res: Response, next: NextFunction) => {
+export const getUpdateAlertOnAllMarket = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const alerts: Alert[] = await readJsonFile('alertSpread.json');
         const alertsState = await Promise.all(alerts.map(async (alert: Alert) => {
@@ -57,8 +57,3 @@ const getUpdateAlertOnAllMarket = async (req: Request, res: Response, next: Next
         next(error);
     }
 }
-
-module.exports = {
-    getUpdateAlertByMarketId,
-    getUpdateAlertOnAllMarket
-};
