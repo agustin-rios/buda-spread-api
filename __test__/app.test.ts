@@ -23,14 +23,14 @@ describe('Market Routes', () => {
     });
   
     it('should get a specific market by ID', async () => {
-      const marketId = 'BTC-CLP';  // Replace with a valid market ID for your tests
+      const marketId = 'BTC-CLP';  
       const response = await request(app).get(`/api/buda/markets/${marketId}`);
       expect(response.status).toBe(200);
       expect(response.body).toHaveProperty('id', marketId);
     });
   
     it('should get order book for a specific market', async () => {
-      const marketId = 'btc-clp';  // Replace with a valid market ID for your tests
+      const marketId = 'BTC-CLP';  
       const response = await request(app).get(`/api/buda/markets/${marketId}/order_book`);
       expect(response.status).toBe(200);
       expect(response.body).toHaveProperty('bids');
@@ -38,7 +38,7 @@ describe('Market Routes', () => {
     });
   
     it('should calculate spread for a specific market', async () => {
-      const marketId = 'btc-clp';  // Replace with a valid market ID for your tests
+      const marketId = 'BTC-CLP';  
       const response = await request(app).get(`/api/buda/markets/${marketId}/spread`);
       expect(response.status).toBe(200);
       expect(response.body).toHaveProperty('spread');
