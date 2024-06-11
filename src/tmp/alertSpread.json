@@ -1,1 +1,6 @@
-[]
+[
+  {
+    "marketId": "BTC-CLP",
+    "spread": 500
+  }
+]

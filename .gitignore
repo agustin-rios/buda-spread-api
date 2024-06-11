@@ -137,3 +137,6 @@ dist
 # /prisma/.env
 # /prisma/migrations
 # /prisma/generated
+
+# ignore temporary files
+tmp/

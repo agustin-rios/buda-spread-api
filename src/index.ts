@@ -4,8 +4,17 @@ import express, {
 import dotenv from "dotenv";
 import cors from 'cors';
 
+const { deleteJsonFile, createTmpFolder, writeJsonFile } = require('./util/jsonStorage');
 const applyRoutes = require("./routes");
 
+// creating tmp folder
+createTmpFolder();
+
+// if the file exists, delete it; clean data when api is restarted
+deleteJsonFile('alertSpread.json');
+
+// creating the file
+writeJsonFile('alertSpread.json', []);
 
 dotenv.config();
 
