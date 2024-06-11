@@ -43,5 +43,4 @@ app.use((error: Error, req: Request, res: Response) => {
   });
 });
 
-// listening to server connection
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+export default app;
