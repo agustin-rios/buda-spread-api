@@ -1,7 +1,7 @@
 import { paths } from '../api/schema';
-type MarketOrderBook = paths['markets/{marketId}/order_book']['get']['responses']['200']['content']['application/json'];
-type OrderBook = MarketOrderBook['order_book'];
-type SpreadResponse = {
+export type MarketOrderBook = paths['markets/{marketId}/order_book']['get']['responses']['200']['content']['application/json'];
+export type OrderBook = MarketOrderBook['order_book'];
+export type SpreadResponse = {
     marketId: string;
     spread?: number;
     error?: string;

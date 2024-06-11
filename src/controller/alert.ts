@@ -1,12 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
 import { readJsonFile, writeJsonFile } from '../util/jsonStorage';
 
+type Alert = {
+    marketId: string;
+    spread: number;
+}
+
 const postSpreadAlert = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { marketId, spread } = req.body;
-        const alerts = await readJsonFile('alertSpread.json');
+        const { marketId, spread } : {marketId: string, spread: number} = req.body;
+        const alerts: Alert[] = await readJsonFile('alertSpread.json');
         // we need to check if the alert already exists
-        const alertExists = alerts.find((alert: any) => alert.marketId === marketId);
+        const alertExists = alerts.find((alert: Alert) => alert.marketId === marketId);
         if (alertExists) {
             // if the alert exists, we update the spread
             alertExists.spread = spread;
@@ -23,7 +28,7 @@ const postSpreadAlert = async (req: Request, res: Response, next: NextFunction) 
 
 const getSpreadAlerts = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const alerts = await readJsonFile('alertSpread.json');
+        const alerts: Alert[] = await readJsonFile('alertSpread.json');
         res.status(200).json(alerts);
     } catch (error) {
         next(error);

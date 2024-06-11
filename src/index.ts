@@ -20,7 +20,6 @@ dotenv.config();
 
 // setting app
 const app: Application = express();
-const PORT: number = parseInt(process.env.PORT ?? '8080');
 
 // rules of our app
 app.use(express.json());
