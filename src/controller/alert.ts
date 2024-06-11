@@ -5,9 +5,17 @@ const postSpreadAlert = async (req: Request, res: Response, next: NextFunction) 
     try {
         const { marketId, spread } = req.body;
         const alerts = await readJsonFile('alertSpread.json');
-        alerts.push({ marketId, spread });
+        // we need to check if the alert already exists
+        const alertExists = alerts.find((alert: any) => alert.marketId === marketId);
+        if (alertExists) {
+            // if the alert exists, we update the spread
+            alertExists.spread = spread;
+        } else {
+            // if the alert doesn't exist, we create it
+            alerts.push({ marketId, spread });
+        }
         await writeJsonFile('alertSpread.json', alerts);
-        res.status(201).json({ marketId, spread });
+        res.status(201).json({ message: 'Alert created successfully' });
     } catch (error) {
         next(error);
     }
