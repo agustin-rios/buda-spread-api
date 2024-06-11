@@ -1,12 +1,6 @@
 import { Router } from 'express';
 
-const { 
-    getMarketsFromBuda, 
-    getMarketByIdFromBuda, 
-    getMarketOrderBookFromBuda,
-    getMarketSpread,
-    getAllMarketSpreads
-} = require('./../controller/api.buda');
+import { getMarketsFromBuda, getMarketByIdFromBuda, getMarketOrderBookFromBuda, getMarketSpread, getAllMarketSpreads } from './../controller/api.buda';
 
 const router = Router();
 

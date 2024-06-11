@@ -1,9 +1,6 @@
 import { Router } from 'express';
 
-const { 
-    postSpreadAlert,
-    getSpreadAlerts
-} = require('./../controller/alert');
+import { postSpreadAlert, getSpreadAlerts } from './../controller/alert';
 
 const router = Router();
 

@@ -6,7 +6,7 @@ type Alert = {
     spread: number;
 }
 
-const postSpreadAlert = async (req: Request, res: Response, next: NextFunction) => {
+export const postSpreadAlert = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { marketId, spread } : {marketId: string, spread: number} = req.body;
         const alerts: Alert[] = await readJsonFile('alertSpread.json');
@@ -26,7 +26,7 @@ const postSpreadAlert = async (req: Request, res: Response, next: NextFunction) 
     }
     }
 
-const getSpreadAlerts = async (req: Request, res: Response, next: NextFunction) => {
+export const getSpreadAlerts = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const alerts: Alert[] = await readJsonFile('alertSpread.json');
         res.status(200).json(alerts);
@@ -34,8 +34,3 @@ const getSpreadAlerts = async (req: Request, res: Response, next: NextFunction) 
         next(error);
     }
 }
-
-module.exports = {
-    postSpreadAlert,
-    getSpreadAlerts
-};
