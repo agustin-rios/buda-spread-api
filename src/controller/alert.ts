@@ -6,6 +6,7 @@ type Alert = {
     spread: number;
 }
 
+// uri: /api/alert/spread  :post
 export const postSpreadAlert = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { marketId, spread } : {marketId: string, spread: number} = req.body;
@@ -26,6 +27,7 @@ export const postSpreadAlert = async (req: Request, res: Response, next: NextFun
     }
     }
 
+// uri: /api/alert/spread  :get
 export const getSpreadAlerts = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const alerts: Alert[] = await readJsonFile('alertSpread.json');

@@ -8,6 +8,7 @@ type Alert = {
     spread: number;
 }
 
+// uri: /api/poll/:marketId :get
 export const getUpdateAlertByMarketId = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { marketId } = req.params;
@@ -35,6 +36,7 @@ export const getUpdateAlertByMarketId = async (req: Request, res: Response, next
     }
 }
 
+// uri: /api/poll :get
 export const getUpdateAlertOnAllMarket = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const alerts: Alert[] = await readJsonFile('alertSpread.json');

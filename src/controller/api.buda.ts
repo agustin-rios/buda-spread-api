@@ -3,6 +3,8 @@ import { NextFunction, Request, Response } from 'express';
 import { getMarkets, getMarketById, getMarketOrderBook } from "../api/buda";
 import { calculateSpread } from "../util/order_book";
 
+
+// uri: /api/buda/markets/ :get
 export const getMarketsFromBuda = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { data } = await getMarkets({ params: {} });
@@ -13,6 +15,7 @@ export const getMarketsFromBuda = async (req: Request, res: Response, next: Next
   }
 }
 
+// uri: /api/buda/markets/:marketId :get
 export const getMarketByIdFromBuda = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { marketId } = req.params;
@@ -24,6 +27,7 @@ export const getMarketByIdFromBuda = async (req: Request, res: Response, next: N
   }
 }
 
+// uri: /api/buda/markets/:marketId/order_book :get
 export const getMarketOrderBookFromBuda = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { marketId } = req.params;
@@ -35,6 +39,7 @@ export const getMarketOrderBookFromBuda = async (req: Request, res: Response, ne
   }
 }
 
+// uri: /api/buda/markets/:marketId/spread :get
 export const getMarketSpread = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { marketId } = req.params;
@@ -47,6 +52,7 @@ export const getMarketSpread = async (req: Request, res: Response, next: NextFun
   }
 }
 
+// uri: /api/buda/markets/spreads :get
 export const getAllMarketSpreads = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { data } = await getMarkets({ params: {} });
