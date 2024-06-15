@@ -4,16 +4,19 @@ import express, {
 import dotenv from "dotenv";
 import cors from 'cors';
 
+const { initTmpFolder } = require('./util/jsonStorage');
 const applyRoutes = require("./routes");
 
+// creating tmp folder
+initTmpFolder(['alertSpread.json']);
 
 dotenv.config();
 
 // setting app
 const app: Application = express();
-const PORT: number = parseInt(process.env.PORT ?? '8080');
 
 // rules of our app
+app.use(express.json());
 app.use(
   cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
